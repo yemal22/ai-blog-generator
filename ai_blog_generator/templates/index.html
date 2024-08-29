@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes rotation {  
+            from {  
+                transform: rotate(0deg);  
+            }  
+            to {  
+                transform: rotate(360deg);  
+            }  
+        }  
+
+        .circle {  
+            width: 50px;  
+            height: 50px;  
+            border: 5px solid #3498db;  
+            border-radius: 50%;  
+            border-top: 5px solid transparent;  
+            animation: rotation 1s linear infinite;  
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+    <header class="flex justify-between items-center bg-blue-600 h-16 px-5 text-white">
+        <h1 class="text-3xl font-bold">AI Blog Generator</h1>
+        <div><a href="#" class="text-sm hover:underline">Logout</a></div>
+    </header>
+    <main class="flex-grow mt-10 max-w-3xl px-4 mx-auto sm:px-0">
+        <div class=" bg-white rounded-lg mx-auto p-6 shadow-lg transition-transform transform hover:scale-105">
+            <div class="text-center">
+                <h2 class="mb-4 font-semibold text-2xl">Welcome to the AI blog Generator</h2>
+                <p class="text-gray-700">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo tenetur consequatur sit dolorem? Illo vel sit accusamus quae expedita vitae quod ullam? Autem ad reiciendis quis vero ex reprehenderit labore!
+                </p>
+            </div>
+            <br>
+            <div>
+                <h2 class="font-semibold mb-4 text-xl">Enter Youtube Link</h2>
+                <div class="flex space-x-4">
+                    <input type="url" class="flex-grow border border-blue-400 rounded-l-md p-2" name="youtulink" id="youtulink" placeholder="Paste Youtube Link...">
+                    <button id="generateBlogButton" class="bg-blue-600 hover:bg-blue-700 p-2 text-white rounded-r-md">Generate</button>
+                </div>
+            </div>
+
+            <div style="display: none;" class="mx-auto mt-8 circle" id="loading-circle"></div>
+
+            <section class="mt-10">
+                <h2 class="font-semibold text-xl mb-4">Generated Blog</h2>
+                <div id="blogContent" class="mt-2 text-gray-700">
+
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="text-center text-black p-6 mt-4">
+        Powered by <a href="" class="hover:text-blue-500">yemalin</a>
+    </footer>
+</body>
+</html>
