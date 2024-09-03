@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock title %}
+    
+{% block content %}
+    
+<div class="flex justify-center items-center flex-grow">
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-8">
+        <form class="space-y-4" action="" method="POST">
+            {% csrf_token %}
+            
+            {% include 'messages.html' %}
+
+            {{ form.non_field_errors }}
+                
+            <h2 class="text-xl font-bold text-center text-blue-600" >Register</h2>
+            <div>
+                <label for="username" class="font-medium mb-1 block">Username</label>
+                {{ form.username.errors }}
+                {{ form.username }}
+            </div>
+            <div>
+                <label for="email" class="font-medium mb-1 block">Email</label>
+                {{form.email.errors }}
+                {{ form.email }}
+            </div>
+            <div>
+                <label for="password" class="font-medium mb-1 block">Password</label>
+                {{ form.password.errors }}
+                {{ form.password }}
+            </div>
+            <div>
+                <label for="confirm-password" class="font-medium mb-1 block">Confirm Password</label>
+                {{ form.confirm_password.errors }}
+                {{ form.confirm_password }}
+            </div>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white w-full p-2 rounded">Signup</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+    

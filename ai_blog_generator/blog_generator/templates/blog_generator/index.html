@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Generator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+{% extends 'base.html' %}
+
+{% block title %} AI Blog Generator {% endblock title %}
+
+
+{% block content %}
+
     <style>
         @keyframes rotation {  
             from {  
@@ -24,14 +24,10 @@
             animation: rotation 1s linear infinite;  
         }
     </style>
-</head>
-<body class="flex flex-col min-h-screen bg-gray-100">
-    <header class="flex justify-between items-center bg-blue-600 h-16 px-5 text-white">
-        <h1 class="text-3xl font-bold">AI Blog Generator</h1>
-        <div><a href="#" class="text-sm hover:underline">Logout</a></div>
-    </header>
+    
     <main class="flex-grow mt-10 max-w-3xl px-4 mx-auto sm:px-0">
         <div class=" bg-white rounded-lg mx-auto p-6 shadow-lg transition-transform transform hover:scale-105">
+            {% include 'messages.html' %}
             <div class="text-center">
                 <h2 class="mb-4 font-semibold text-2xl">Welcome to the AI blog Generator</h2>
                 <p class="text-gray-700">
@@ -57,8 +53,48 @@
             </section>
         </div>
     </main>
-    <footer class="text-center text-black p-6 mt-4">
-        Powered by <a href="" class="hover:text-blue-500">yemalin</a>
-    </footer>
-</body>
-</html>
+    <script>
+        
+        document.getElementById('generateBlogButton').addEventListener('click', () => {
+            const youtubeLink = document.getElementById('youtulink').value;
+            const loadingIndicator = document.getElementById('loading');
+            const blogContent = document.getElementById('blogContent');
+            if(youtubeLink){
+                document.getElementById('loading-circle').style.display = 'block';
+                loadingIndicator.classList.remove('hidden');
+                blogContent.innerHTML = '';
+
+                const endpointUrl = '/generate-blog';
+
+                (async () => {
+                    try {
+                        const response = await fetch(endpointUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({link: youtubeLink})
+                        });
+
+                        const data = await response.json();
+                        blogContent.innerHTML = data.blogContent;
+                        document.getElementById('loading-circle').style.display = 'none';
+                        loadingIndicator.classList.add('hidden');
+
+                    } catch (error) {
+                        console.error("Error occured: ", error);
+                        alert('Something is wrong. Please try again!')
+                        document.getElementById('loading-circle').style.display = 'none';
+                        loadingIndicator.classList.add('hidden')
+                    }
+                })()
+            } else {
+                alert('Please enter a YouTube link');
+            }
+
+        })
+
+    </script>
+
+{% endblock content %}
+    

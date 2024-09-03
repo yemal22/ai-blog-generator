@@ -1,0 +1,18 @@
+<nav class="flex justify-between items-center bg-blue-700 h-16 px-5 text-white">
+    <h1 class="text-3xl font-bold">AI Blog Generator</h1>
+
+    
+    {% if request.user.is_authenticated %}
+    <div>
+        <span class="text-white font-semibold mr-1">{{request.user.username}}</span>
+        <a href="{% url 'logout-user' %}" class="text-white hover:text-gray-300">Logout</a>
+    </div>  
+    {% else %}
+    <div>
+        <a href="{% url 'login-user' %}" class="text-white hover:text-gray-300">Login</a>
+        <a href="{% url 'signup-user' %}" class="text-white hover:text-gray-300">Signup</a>
+    </div>
+    {% endif %}
+        
+    
+</nav>
